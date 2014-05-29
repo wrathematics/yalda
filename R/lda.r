@@ -1,14 +1,7 @@
 lda <- function(infile, outfile, compute.loglik=TRUE, num.topics=10, alpha=50/num.topics, beta=0.1, niter=15, burnin=10, verbose=FALSE)
 {
-  if (verbose)
-    verbose <- "true"
-  else
-    verbose <- "false"
-  
-  if (compute.loglik)
-    complik <- "true"
-  else
-    complik <- "false"
+  verbose <- tolower(as.character(verbose))
+  comploglik <- tolower(as.character(compute.loglik))
   
   ### This is exactly what it looks like.
   argv <- c(
