@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rm -r src/*.o
+rm -r src/pbdLDA.so
+cd src/lda && make clean

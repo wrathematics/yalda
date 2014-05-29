@@ -1,0 +1,20 @@
+#################################################################
+
+PKG_CPPFLAGS = -Wfatal-errors
+
+PKG_LIBS = lda/liblda.a
+
+OBJECTS = R_lda.o
+
+### Start making here.
+all: mklda $(SHLIB)
+
+$(SHLIB): $(OBJECTS)
+
+mklda: 
+	cd lda && $(MAKE) static
+
+$(OBJECTS): mklda
+
+clean:
+	cd lda && make clean

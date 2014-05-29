@@ -1,0 +1,27 @@
+What is this?
+================================================================================
+yalda is Yet Another LDA package for R.  This uses Google's plda package
+(serial only at the moment).  This "port" for R is very lazy at the moment 
+(look at R/lda.r to get an idea for how it works), and relies on disk IO 
+"each way", rather than being fully integrated with R.  Assuming it makes sense
+to do so, future versions will have a more fully integrated set of wrappers.
+For the moment, consider this a prototype.
+
+As the name implies, this package can be used to fit Latent Dirichlet Allocation
+(LDA) models.
+
+
+
+How to install
+================================================================================
+Download the package and issue the usual 
+
+R CMD INSTALL yalda_0.1.tar.gz
+
+and everything should just work.  If it doesn't, please let me know.
+
+
+
+How to use this
+================================================================================
+
