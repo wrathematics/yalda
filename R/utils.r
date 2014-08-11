@@ -1,3 +1,20 @@
+is.int <- function(x)
+{
+  if (is.numeric(x))
+  {
+    if (is.integer(x))
+      return( TRUE )
+    else if (x-as.integer(x) < sqrt(.Machie$double.eps))
+      return( TRUE )
+    else
+      return( FALSE )
+  }
+  else
+    return( FALSE )
+}
+
+
+
 # error checking for the lazy man
 must.be <- function(x, type)
 {

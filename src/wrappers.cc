@@ -39,8 +39,8 @@ int freestr(int argc, char **argv)
 SEXP R_lda(SEXP argv_)
 {
   SEXP ret;
-  int i, retval;
-  int argc = LENGTH(argv_);
+  int i;
+  const int argc = LENGTH(argv_);
   
   char **argv = (char**) malloc(argc * sizeof(*argv));
   
@@ -51,7 +51,7 @@ SEXP R_lda(SEXP argv_)
   
   REAL(ret)[0] = lda_main(argc, argv);
   
-  retval = freestr(argc, argv);
+  freestr(argc, argv);
   
   UNPROTECT(1);
   return ret;
@@ -62,8 +62,8 @@ SEXP R_lda(SEXP argv_)
 SEXP R_lda_infer(SEXP argv_)
 {
   SEXP ret;
-  int i, retval;
-  int argc = LENGTH(argv_);
+  int i;
+  const int argc = LENGTH(argv_);
   
   char **argv = (char**) malloc(argc * sizeof(*argv));
   
@@ -74,7 +74,7 @@ SEXP R_lda_infer(SEXP argv_)
   
   REAL(ret)[0] = infer_main(argc, argv);
   
-  retval = freestr(argc, argv);
+  freestr(argc, argv);
   
   UNPROTECT(1);
   return ret;

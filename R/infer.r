@@ -7,44 +7,34 @@
 #  --burn_in_iterations 10                              \
 #  --total_iterations 15
 
+setMethod("infer", signature(x="LDA"),
+  function(x, newdatafile, inferfile)
+  {
+    must.be(newdatafile, "character")
+    must.be(inferfile, "character")
+    
+    newdatafile <- file_path_as_absolute(newdatafile)
+    inferfile <- file_path_as_absolute(inferfile)
+    
+    if (!file.exists(newdatafile))
+      stop(paste("Data set newdatafile=", newdatafile, "does not exist"))
+    
+    ### This is exactly what it looks like.
+    argv <- c(
+      "./lda",
+      "--num_topics", as.character(x@num.topics),
+      "--alpha", as.character(x@alpha),
+      "--beta", as.character(x@beta),
+      "--inference_data_file", as.character(newdatafile),
+      "--model_file", x@modelfile,
+      "--inference_result_file", as.character(inferfile),
+      "--burn_in_iterations", as.character(x@burnin),
+      "--total_iterations", as.character(x@niter),
+    )
+    
+    ret <- .Call("R_infer", argv, PACKAGE="yalda")
+    
+    invisible()
+  }
+)
 
-infer <- function(infile, modelfile, outfile, num.topics=10, 
-                alpha=50/num.topics, beta=0.01, niter=15, burnin=10, verbose=FALSE)
-{
-  must.be(infile, "character")
-  must.be(modelfile, "character")
-  must.be(outfile, "character")
-  must.be(compute.loglik, "logical")
-  must.be(num.topics, "numeric")
-  must.be(alpha, "numeric")
-  must.be(beta, "numeric")
-  must.be(niter, "numeric")
-  must.be(burnin, "numeric")
-  must.be(verbose, "logical")
-  
-  
-  verbose <- tolower(as.character(verbose))
-  comploglik <- tolower(as.character(compute.loglik))
-  
-  
-  ### This is exactly what it looks like.
-  argv <- c(
-    "./infer",
-    "--alpha", as.character(alpha),
-    "--beta", as.character(beta),
-    "--training_data_file", as.character(infile),
-    "--model_file", as.character(outfile),
-    "--burn_in_iterations", as.character(burnin),
-    "--total_iterations", as.character(niter),
-    "--verbose", as.character(verbose),
-    "--compute_likelihood", as.character(comploglik)
-  )
-  
-  ret <- .Call("R_lda_infer", argv)
-  
-  
-  if (compute.loglik)
-    return(ret)
-  else
-    return(NA)
-}

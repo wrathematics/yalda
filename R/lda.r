@@ -1,5 +1,6 @@
 lda <- function(infile, outfile, compute.loglik=TRUE, num.topics=10, 
-                alpha=50/num.topics, beta=0.01, niter=15, burnin=10, verbose=FALSE)
+                alpha=50/num.topics, beta=0.01, niter=15, burnin=10, 
+                verbose=FALSE)
 {
   must.be(infile, "character")
   must.be(outfile, "character")
@@ -14,6 +15,19 @@ lda <- function(infile, outfile, compute.loglik=TRUE, num.topics=10,
   
   verbose <- tolower(as.character(verbose))
   comploglik <- tolower(as.character(compute.loglik))
+  
+  infile <- file_path_as_absolute(infile)
+  modelfile <- file_path_as_absolute(modelfile)
+  
+  if (!file.exists(infile))
+    stop(paste("Data set infile=", infile, "does not exist"))
+  
+  
+  ret <- new("LDA", infile=infile, modelfile=modelfile, 
+            num.topics=num.topics, alpha=alpha, beta=beta,
+            niter=niter, burnin=burnin, loglik=NA)
+  
+  check.lda(ret)
   
   
   ### This is exactly what it looks like.
@@ -30,11 +44,11 @@ lda <- function(infile, outfile, compute.loglik=TRUE, num.topics=10,
     "--compute_likelihood", as.character(comploglik)
   )
   
-  ret <- .Call("R_lda", argv)
-  
+  loglik <- .Call("R_lda", argv, PACKAGE="yalda")
   
   if (compute.loglik)
-    return(ret)
-  else
-    return(NA)
+    ret@loglik <- loglik
+  
+  return( ret )
 }
+

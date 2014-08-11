@@ -3,7 +3,7 @@ Title: Yet Another LDA package
 Version: 0.1
 Description: This offers R access to the serial portion of the plda application 
       from Google.
-Depends: R (>= 2.14.0)
+Depends: R (>= 2.14.0), tools
 LazyLoad: yes
 LazyData: yes
 ByteCompile: yes

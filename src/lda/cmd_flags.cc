@@ -33,6 +33,7 @@ LDACmdLineFlags::LDACmdLineFlags() {
   burn_in_iterations_ = -1;
   total_iterations_ = -1;
   compute_likelihood_ = "false";
+  verbose_ = "false";
 }
 
 void LDACmdLineFlags::ParseCmdFlags(int argc, char** argv) {
