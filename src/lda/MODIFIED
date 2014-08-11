@@ -1,0 +1,15 @@
+The original work comes from Google Inc, copyright 2008.  Modifications
+to this source are by Drew Schmidt, 2014, licensed under the same Apache 2.0
+license.  The list of files and their modifications is:
+
+* cmd_flags.cc:
+    Extra arguments are added for better functionality within R.
+
+* infer.cc:
+    Function main() is transformed into infer_main() and modified for better
+    usage with R.
+
+* lda.cc:
+    Function main() is transformed into lda_main() and modified for better
+    usage with R.
+

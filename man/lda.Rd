@@ -9,7 +9,8 @@
   Currently IO is required "both ways".
 }
 \usage{
-  lda(infile, outfile, compute.loglik=TRUE, num.topics=10, alpha=50/num.topics, beta=0.01, niter=15, burnin=10, verbose=FALSE)
+  lda(infile, outfile, compute.loglik=TRUE, num.topics=10, alpha=50/num.topics, 
+      beta=0.01, niter=15, burnin=10, verbose=FALSE)
 }
 \arguments{
   \item{infile}{A string pointing to the input dataset.}
@@ -18,7 +19,7 @@
   log-likelihood should be returned.}
   \item{num.topics}{integer; determines the number of topics in the
   topic model.}
-  \item{alphs}{numeric; }
+  \item{alpha}{numeric; }
   \item{beta}{numeric; }
   \item{niter}{integer; the total number of iterations to perform
   in fitting the model.}

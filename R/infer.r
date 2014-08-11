@@ -1,7 +1,18 @@
-lda <- function(infile, outfile, compute.loglik=TRUE, num.topics=10, 
+#  ./infer \
+#  --alpha 0.1    \
+#  --beta 0.01                                           \
+#  --inference_data_file ./testdata/test_data.txt \
+#  --inference_result_file /tmp/inference_result.txt \
+#  --model_file /tmp/lda_model.txt                       \
+#  --burn_in_iterations 10                              \
+#  --total_iterations 15
+
+
+infer <- function(infile, modelfile, outfile, num.topics=10, 
                 alpha=50/num.topics, beta=0.01, niter=15, burnin=10, verbose=FALSE)
 {
   must.be(infile, "character")
+  must.be(modelfile, "character")
   must.be(outfile, "character")
   must.be(compute.loglik, "logical")
   must.be(num.topics, "numeric")
@@ -18,8 +29,7 @@ lda <- function(infile, outfile, compute.loglik=TRUE, num.topics=10,
   
   ### This is exactly what it looks like.
   argv <- c(
-    "./lda",
-    "--num_topics", as.character(num.topics),
+    "./infer",
     "--alpha", as.character(alpha),
     "--beta", as.character(beta),
     "--training_data_file", as.character(infile),
@@ -30,7 +40,7 @@ lda <- function(infile, outfile, compute.loglik=TRUE, num.topics=10,
     "--compute_likelihood", as.character(comploglik)
   )
   
-  ret <- .Call("R_lda", argv)
+  ret <- .Call("R_lda_infer", argv)
   
   
   if (compute.loglik)

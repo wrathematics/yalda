@@ -6,6 +6,8 @@
 extern "C" {
 
 double lda_main(int argc, char **argv);
+int infer_main(int argc, char** argv);
+
 
 char *unliteral(const char *str) {
   char *ret;
@@ -18,6 +20,8 @@ char *unliteral(const char *str) {
   return ret;
 }
 
+
+
 int freestr(int argc, char **argv)
 {
   int i;
@@ -29,6 +33,8 @@ int freestr(int argc, char **argv)
   
   return 0;
 }
+
+
 
 SEXP R_lda(SEXP argv_)
 {
@@ -44,6 +50,29 @@ SEXP R_lda(SEXP argv_)
     argv[i] = unliteral(CHARPT(argv_, i));
   
   REAL(ret)[0] = lda_main(argc, argv);
+  
+  retval = freestr(argc, argv);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+
+
+SEXP R_lda_infer(SEXP argv_)
+{
+  SEXP ret;
+  int i, retval;
+  int argc = LENGTH(argv_);
+  
+  char **argv = (char**) malloc(argc * sizeof(*argv));
+  
+  PROTECT(ret = allocVector(REALSXP, 1));
+  
+  for (i=0; i<argc; i++)
+    argv[i] = unliteral(CHARPT(argv_, i));
+  
+  REAL(ret)[0] = infer_main(argc, argv);
   
   retval = freestr(argc, argv);
   

@@ -1,4 +1,5 @@
 // Copyright 2008 Google Inc.
+// Copyright 2014 Drew Schmidt.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +35,8 @@
 #include "sampler.h"
 #include "cmd_flags.h"
 
-int main(int argc, char** argv) {
+extern "C" {
+int infer_main(int argc, char** argv) {
   using learning_lda::LDACorpus;
   using learning_lda::LDAModel;
   using learning_lda::LDAAccumulativeModel;
@@ -46,7 +48,7 @@ int main(int argc, char** argv) {
   using std::ifstream;
   using std::ofstream;
   using std::istringstream;
-
+  
   LDACmdLineFlags flags;
   flags.ParseCmdFlags(argc, argv);
   if (!flags.CheckInferringValidity()) {
@@ -98,4 +100,7 @@ int main(int argc, char** argv) {
       }
     }
   }
+  
+  return 0;
+}
 }

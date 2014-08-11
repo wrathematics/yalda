@@ -1,6 +1,5 @@
 // Copyright 2008 Google Inc.
-//
-// Modifications 2014, Schmidt
+// Copyright 2014 Drew Schmidt.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

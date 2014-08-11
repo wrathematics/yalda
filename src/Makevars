@@ -4,7 +4,7 @@ PKG_CPPFLAGS = -Wfatal-errors
 
 PKG_LIBS = lda/liblda.a
 
-OBJECTS = R_lda.o
+OBJECTS = wrappers.o
 
 ### Start making here.
 all: mklda $(SHLIB)
